@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// basic schema - id + message + time
 const vaultSchema = new mongoose.Schema({
     vaultId: {
         type: String,
