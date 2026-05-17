@@ -4,7 +4,6 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 
 dotenv.config();
-
 connectDB();
 
 const app = express();
@@ -17,6 +16,8 @@ const port = process.env.PORT || 5000;
 app.get('/', (req, res) => {
     res.send('Vault API Working');
 });
+const vaultRoutes = require("./routes/vaultRoutes");
+app.use('/api/vault', vaultRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
