@@ -1,23 +1,33 @@
 const { nanoid } = require("nanoid");
+
 const Vault = require("../models/Vault");
 
+const { encrypt } = require("../utils/encryption");
+
+
 // create a new vault entry
+
 const createVault = async (req, res) => {
     try {
+
         const { message } = req.body;
 
         if (!message) {
+
             return res.status(400).json({
                 success: false,
                 message: "Message is required"
             });
+
         }
 
-        const vaultId = nanoid(8); // generate unique id
+        const encryptedMessage = encrypt(message);
+
+        const vaultId = nanoid(8);
 
         const newVault = await Vault.create({
             vaultId,
-            message
+            message: encryptedMessage
         });
 
         return res.status(201).json({
@@ -26,11 +36,14 @@ const createVault = async (req, res) => {
         });
 
     } catch (error) {
-        return res.status(400).json({
+
+        return res.status(500).json({
             success: false,
             message: error.message
         });
+
     }
+
 };
 
 module.exports = {
