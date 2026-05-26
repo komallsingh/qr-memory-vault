@@ -22,3 +22,15 @@ app.use('/api/vault', vaultRoutes);
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+
+app.post('/api/vault', (req, res) => {
+    const { name, username, password } = req.body; });
+
+app.delete('/api/vault/:id', (req, res) => {
+    const { id } = req.params;
+});
+
+app.put('/api/vault/:id', (req, res) => {
+    const { id } = req.params;
+    const { name, username, password } = req.body;
+});
